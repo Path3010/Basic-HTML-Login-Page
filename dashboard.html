@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <h2>Welcome, <span id="username"></span>!</h2>
+    <button onclick="location.href='edit-profile.html'">Edit Profile</button>
+    <button onclick="location.href='change-password.html'">Change Password</button>
+    <button onclick="logout()">Logout</button>
+
+    <script>
+        function showDashboard() {
+            if (localStorage.getItem("loggedIn") === "true") {
+                document.getElementById("username").innerText = localStorage.getItem("name");
+            } else {
+                alert("You must login first");
+                location.href = "login.html";
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            alert("Logged out!");
+            location.href = "login.html";
+        }
+
+        window.onload = showDashboard;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Login System</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div id="signupPage">
+    <h2>Signup</h2>
+    <input type="text" id="name" placeholder="Name"><br>
+    <input type="text" id="email" placeholder="Email"><br>
+    <input type="text" id="mobile" placeholder="Mobile"><br>
+    <input type="text" id="address" placeholder="Address"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button onclick="signup()">Signup</button><br>
+    <a href="login.html">Go to Login</a>
+  </div>
+
+  <div id="loginPage" style="display:none;">
+    <h2>Login</h2>
+    <input type="text" id="loginEmail" placeholder="Email"><br>
+    <input type="password" id="loginPassword" placeholder="Password"><br>
+    <button onclick="login()">Login</button><br>
+    <a href="signup.html">Go to Signup</a>
+  </div>
+
+  <div id="dashboard" style="display:none;">
+    <h2>Welcome, <span id="username"></span>!</h2>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    function signup() {
+      localStorage.setItem("name", document.getElementById("name").value);
+      localStorage.setItem("email", document.getElementById("email").value);
+      localStorage.setItem("mobile", document.getElementById("mobile").value);
+      localStorage.setItem("address", document.getElementById("address").value);
+      localStorage.setItem("password", document.getElementById("password").value);
+      alert("Signup successful!");
+      location.href = "login.html";
+    }
+
+    function login() {
+      let email = document.getElementById("loginEmail").value;
+      let password = document.getElementById("loginPassword").value;
+
+      if (email === localStorage.getItem("email") && password === localStorage.getItem("password")) {
+        alert("Login successful!");
+        localStorage.setItem("loggedIn", "true");
+        location.href = "dashboard.html";
+      } else {
+        alert("Invalid credentials");
+      }
+    }
+
+    function showDashboard() {
+      if (localStorage.getItem("loggedIn") === "true") {
+        document.getElementById("dashboard").style.display = "block";
+        document.getElementById("username").innerText = localStorage.getItem("name");
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      alert("Logged out!");
+      location.href = "login.html";
+    }
+
+    window.onload = function () {
+      let path = window.location.pathname;
+      if (path.includes("signup")) {
+        document.getElementById("signupPage").style.display = "block";
+      } else if (path.includes("login")) {
+        document.getElementById("loginPage").style.display = "block";
+      } else if (path.includes("dashboard")) {
+        showDashboard();
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signup</title>
+</head>
+
+<body>
+    <h2>Signup</h2>
+    <input type="text" id="name" placeholder="Name" autocomplete=""><br>
+    <input type="text" id="email" placeholder="Email" autocomplete="off"><br>
+    <input type="text" id="mobile" placeholder="Mobile"><br>
+    <input type="text" id="address" placeholder="Address" autocomplete="off"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button onclick="signup()">Signup</button><br>
+    <a href="login.html">Go to Login</a>
+
+    <script>
+        function signup() {
+            localStorage.setItem("name", document.getElementById("name").value);
+            localStorage.setItem("email", document.getElementById("email").value);
+            localStorage.setItem("mobile", document.getElementById("mobile").value);
+            localStorage.setItem("address", document.getElementById("address").value);
+            localStorage.setItem("password", document.getElementById("password").value);
+            alert("Signup successful!");
+            location.href = "login.html";
+        }
+    </script>
+</body>
+
+</html>
